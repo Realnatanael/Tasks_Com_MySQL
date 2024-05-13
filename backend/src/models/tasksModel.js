@@ -19,3 +19,10 @@ export const createTask = async (task) => {
 
     return {insertId: createdTask.insertId}; //poderia ter feito return createdTask[0] para retornar a primeira parte do array
 }
+
+export const deleteTask = async (id) => {
+    const query = 'DELETE FROM tasks WHERE id = ?';
+    await connection.execute(query, [id]);
+
+    return {message: 'Tarefa excluída com sucesso'};
+}
