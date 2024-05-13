@@ -26,3 +26,11 @@ export const deleteTask = async (id) => {
 
     return {message: 'Tarefa excluída com sucesso'};
 }
+
+export const updateTask = async (id, task) => {
+    const { title, status } = task;
+    const query = 'UPDATE tasks SET title = ?, status = ? WHERE id = ?';
+    await connection.execute(query, [title, status, id]);
+
+    return {message: 'Tarefa atualizada com sucesso'};
+}

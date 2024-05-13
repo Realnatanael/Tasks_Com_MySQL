@@ -1,4 +1,4 @@
-import { createTask, getAllTasks, deleteTask } from "../models/tasksModel.js";
+import { createTask, getAllTasks, deleteTask, updateTask } from "../models/tasksModel.js";
 
 
 export const getAll = async (req, res) => {
@@ -14,4 +14,12 @@ export const create = async (req, res) => {
 export const deleted = async (req, res) => {
     await deleteTask(req.params.id);
     res.status(200).json({message: 'Tarefa excluída com sucesso'});
+}
+
+export const update = async (req, res) => {
+    const { id } = req.params; //params é o que vem na url e body é o que vem no corpo da requisição
+    const { title, status } = req.body;
+    const task = { title, status };
+    await updateTask(id, task);
+    res.status(200).json({message: 'Tarefa atualizada com sucesso'});
 }
