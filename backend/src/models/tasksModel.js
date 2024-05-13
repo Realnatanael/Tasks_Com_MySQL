@@ -1,6 +1,6 @@
 import {connection} from '../db/connection.js';
 
-export const getAll = async (req, res) => {
+export const getAllTasks = async (req, res) => {
     const tasks = await connection.execute('SELECT * FROM tasks');
     //Eu poderia também deixar tasks como [tasks] aí ele retornatria a 1 parte do meu array que é tasks
     return tasks[0];
@@ -17,5 +17,5 @@ export const createTask = async (task) => {
         [title, 'pendente', dateUTC]
     );
 
-    return createdTask; //poderia ter feito return createdTask[0] para retornar a primeira parte do array
+    return {insertId: createdTask.insertId}; //poderia ter feito return createdTask[0] para retornar a primeira parte do array
 }
